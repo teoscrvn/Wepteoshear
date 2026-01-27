@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VIP TÉO 🔐</title>
+
+<style>
+body{
+    margin:0;
+    font-family: 'Segoe UI', sans-serif;
+    background: radial-gradient(circle at top, #1a1a1a, #000);
+    color:#fff;
+    min-height:100vh;
+}
+
+/* CONTAINER */
+.vip-container{
+    max-width:420px;
+    margin:auto;
+    padding:25px;
+}
+
+/* AVATAR */
+.vip-avatar{
+    width:120px;
+    height:120px;
+    border-radius:50%;
+    margin:20px auto;
+    border:3px solid gold;
+    box-shadow:0 0 25px gold;
+    overflow:hidden;
+}
+.vip-avatar img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+}
+
+/* TITLE */
+.vip-title{
+    text-align:center;
+    font-size:22px;
+    font-weight:bold;
+    margin-top:10px;
+    color:gold;
+    text-shadow:0 0 10px gold;
+}
+
+/* DESC */
+.vip-desc{
+    text-align:center;
+    font-size:14px;
+    opacity:0.85;
+    margin-bottom:25px;
+}
+
+/* BUTTON LIST */
+.vip-buttons{
+    display:flex;
+    flex-direction:column;
+    gap:15px;
+}
+
+/* BUTTON */
+.vip-btn{
+    position:relative;
+    padding:16px;
+    border-radius:16px;
+    background:linear-gradient(145deg,#111,#222);
+    border:2px solid gold;
+    box-shadow:0 0 15px rgba(255,215,0,0.4);
+    cursor:pointer;
+    overflow:hidden;
+    transition:transform .2s;
+}
+.vip-btn:hover{
+    transform:scale(1.03);
+}
+
+/* TEXT COLOR ANIMATION */
+.vip-btn span{
+    font-weight:bold;
+    font-size:15px;
+    animation: colorShift 3s infinite alternate;
+}
+
+/* ICON */
+.vip-btn img{
+    width:28px;
+    vertical-align:middle;
+    margin-right:10px;
+}
+
+/* COLOR SHIFT */
+@keyframes colorShift{
+    0%{color:#ffd700;}
+    33%{color:#ff4ecd;}
+    66%{color:#36d1dc;}
+    100%{color:#00ff9c;}
+}
+
+/* GLOW EFFECT */
+.vip-btn::before{
+    content:"";
+    position:absolute;
+    inset:0;
+    background:linear-gradient(120deg,transparent,rgba(255,215,0,0.3),transparent);
+    transform:translateX(-100%);
+    animation:shine 3s infinite;
+}
+
+@keyframes shine{
+    0%{transform:translateX(-100%);}
+    60%{transform:translateX(100%);}
+    100%{transform:translateX(100%);}
+}
+
+/* FOOTER */
+.vip-footer{
+    margin-top:30px;
+    text-align:center;
+    font-size:12px;
+    opacity:0.6;
+}
+</style>
+</head>
+
+<body>
+
+<div class="vip-container">
+
+    <!-- AVATAR -->
+    <div class="vip-avatar">
+        <img src="https://raw.githubusercontent.com/teoscrvn/-nh/main/media_1768317253%20(2).png">
+    </div>
+
+    <div class="vip-title">🔐 VIP NỘI BỘ – TÉO SCRVN</div>
+    <div class="vip-desc">Khu vực riêng – không công khai – không hướng dẫn 🤫</div>
+
+    <!-- BUTTONS -->
+    <div class="vip-buttons">
+
+        <!-- NÚT VIP CHÍNH -->
+        <div class="vip-btn" onclick="location.href='#'">
+            <span>👑 VÀO LINK VIP ĐẶC BIỆT</span>
+        </div>
+
+        <!-- SHARE / FILE -->
+        <div class="vip-btn" onclick="location.href='#'">
+            <span>📂 File nội bộ – script ngon</span>
+        </div>
+
+        <div class="vip-btn" onclick="location.href='#'">
+            <span>🔥 Share tài nguyên VIP</span>
+        </div>
+
+        <div class="vip-btn" onclick="location.href='#'">
+            <span>🧠 Tool riêng – không public</span>
+        </div>
+
+    </div>
+
+    <div class="vip-footer">
+        © VIP AREA • Access Limited • 🤫
+    </div>
+
+</div>
+
+</body>
+</html>

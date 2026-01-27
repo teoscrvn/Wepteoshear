@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<title>404 Error</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+    body {
+        margin: 0;
+        height: 100vh;
+        background: linear-gradient(135deg,#0f0f0f,#1a1a1a);
+        color: #ccc;
+        font-family: Arial, sans-serif;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        user-select: none;
+    }
+    .box {
+        text-align: center;
+        padding: 30px;
+    }
+    h1 {
+        font-size: 72px;
+        color: #ff4d4d;
+        margin: 0;
+    }
+    p {
+        font-size: 18px;
+        opacity: 0.8;
+    }
+    .hint {
+        margin-top: 20px;
+        font-size: 12px;
+        opacity: 0.3;
+    }
+</style>
+</head>
+<body>
+
+<div class="box" id="errorBox">
+    <h1>404</h1>
+    <p>Trang không tồn tại hoặc đã bị xoá</p>
+    <div class="hint">Please contact administrator</div>
+</div>
+
+<script>
+let clickCount = 0;
+let locked = false;
+let timer = null;
+
+// ấn đúng 3 lần
+document.getElementById("errorBox").addEventListener("click", () => {
+    if (locked) return;
+
+    clickCount++;
+
+    // quá 3 là huỷ
+    if (clickCount > 3) {
+        resetAll();
+        return;
+    }
+
+    // đủ 3 lần
+    if (clickCount === 3) {
+        locked = true;
+
+        timer = setTimeout(() => {
+            // CHỈ mở nếu không click gì thêm trong 5s
+            if (clickCount === 3) {
+                window.location.href = "register.html";
+            }
+            resetAll();
+        }, 5000);
+    }
+});
+
+// click chỗ khác là reset
+document.addEventListener("pointerdown", (e) => {
+    if (!document.getElementById("errorBox").contains(e.target)) {
+        resetAll();
+    }
+});
+
+function resetAll() {
+    clickCount = 0;
+    locked = false;
+    if (timer) clearTimeout(timer);
+    timer = null;
+}
+</script>
+
+</body>
+</html>

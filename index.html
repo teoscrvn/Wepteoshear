@@ -145,8 +145,9 @@ body{
 <div class="container">
 
     <div class="avatar-wrapper">
-        <img src="https://raw.githubusercontent.com/teoscrvn/-nh/main/media_1768317253%20(2).png">
-    </div>
+    <img id="secretAvatar"
+         src="https://raw.githubusercontent.com/teoscrvn/-nh/main/media_1768317253%20(2).png">
+</div>
 
     <div class="name">🍎 téo 🍎 SCRVN 🇻🇳</div>
     <div class="desc">🍎 chia sẻ đồ hướng dẫn làm script ... có gì k hiểu ib tiktok hoặc zalo mik</div>
@@ -272,6 +273,60 @@ body{
 
 </div>
 </div>
+<script>
+const VIP_PASSWORD = "VIP_TEO_2026";
+const SECRET_CODE = "MA_BI_MAT_CUA_BAN";
 
+let clickCount = 0;
+let timer = null;
+let locked = false;
+
+const avatar = document.getElementById("secretAvatar");
+avatar.style.userSelect = "none";
+avatar.style.webkitTapHighlightColor = "transparent";
+
+avatar.addEventListener("click", (e) => {
+    e.stopPropagation();
+    if (locked) return;
+
+    clickCount++;
+
+    if (clickCount > 10) {
+        resetAll();
+        return;
+    }
+
+    if (clickCount === 10) {
+        locked = true;
+
+        timer = setTimeout(() => {
+            const input = prompt("🔐 Nhập mật khẩu:");
+
+            if (input === VIP_PASSWORD) {
+                window.location.href = "vip.html";
+            } 
+            else if (input === SECRET_CODE) {
+                window.location.href = "error.html";
+            } 
+            else {
+                alert("❌ Sai thông tin");
+            }
+
+            resetAll();
+        }, 5000);
+    }
+});
+
+document.addEventListener("pointerdown", (e) => {
+    if (!avatar.contains(e.target)) resetAll();
+});
+
+function resetAll() {
+    clickCount = 0;
+    locked = false;
+    if (timer) clearTimeout(timer);
+    timer = null;
+}
+</script>
 </body>
 </html>
