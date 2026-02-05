@@ -3,169 +3,717 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>VIP TÉO 🔐</title>
+<title>🔐 VIP PREMIUM - TÉO SCRVN</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
 <style>
-body{
-    margin:0;
-    font-family: 'Segoe UI', sans-serif;
-    background: radial-gradient(circle at top, #1a1a1a, #000);
-    color:#fff;
-    min-height:100vh;
+/* RESET & BASE */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
-/* CONTAINER */
-.vip-container{
-    max-width:420px;
-    margin:auto;
-    padding:25px;
+html, body {
+    width: 100%;
+    height: 100%;
+    overflow-x: hidden;
 }
 
-/* AVATAR */
-.vip-avatar{
-    width:120px;
-    height:120px;
-    border-radius:50%;
-    margin:20px auto;
-    border:3px solid gold;
-    box-shadow:0 0 25px gold;
-    overflow:hidden;
-}
-.vip-avatar img{
-    width:100%;
-    height:100%;
-    object-fit:cover;
+body {
+    font-family: 'Poppins', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: 
+        radial-gradient(circle at 10% 20%, rgba(255, 215, 0, 0.03) 0%, transparent 20%),
+        radial-gradient(circle at 90% 80%, rgba(255, 105, 180, 0.03) 0%, transparent 20%),
+        linear-gradient(135deg, #0c0c0c 0%, #1a1a2e 50%, #16213e 100%);
+    color: #fff;
+    min-height: 100vh;
+    position: relative;
 }
 
-/* TITLE */
-.vip-title{
-    text-align:center;
-    font-size:22px;
-    font-weight:bold;
-    margin-top:10px;
-    color:gold;
-    text-shadow:0 0 10px gold;
+/* HIỆU ỨNG NỀN VIP TỐI GIẢN */
+.vip-bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -2;
+    overflow: hidden;
+    background: 
+        linear-gradient(45deg, transparent 49.5%, rgba(255, 215, 0, 0.03) 50%, transparent 50.5%),
+        linear-gradient(-45deg, transparent 49.5%, rgba(255, 105, 180, 0.03) 50%, transparent 50.5%);
+    background-size: 60px 60px;
+    opacity: 0.3;
 }
 
-/* DESC */
-.vip-desc{
-    text-align:center;
-    font-size:14px;
-    opacity:0.85;
-    margin-bottom:25px;
+.vip-pattern {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: 
+        radial-gradient(circle at 20% 30%, rgba(255, 215, 0, 0.05) 0%, transparent 25%),
+        radial-gradient(circle at 80% 20%, rgba(255, 20, 147, 0.05) 0%, transparent 25%),
+        radial-gradient(circle at 40% 80%, rgba(0, 255, 255, 0.05) 0%, transparent 25%);
+    z-index: -1;
 }
 
-/* BUTTON LIST */
-.vip-buttons{
-    display:flex;
-    flex-direction:column;
-    gap:15px;
+/* VIP CONTAINER */
+.vip-section {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 30px 20px;
+    position: relative;
+    z-index: 1;
 }
 
-/* BUTTON */
-.vip-btn{
-    position:relative;
-    padding:16px;
-    border-radius:16px;
-    background:linear-gradient(145deg,#111,#222);
-    border:2px solid gold;
-    box-shadow:0 0 15px rgba(255,215,0,0.4);
-    cursor:pointer;
-    overflow:hidden;
-    transition:transform .2s;
-}
-.vip-btn:hover{
-    transform:scale(1.03);
-}
-
-/* TEXT COLOR ANIMATION */
-.vip-btn span{
-    font-weight:bold;
-    font-size:15px;
-    animation: colorShift 3s infinite alternate;
+.vip-container {
+    width: 100%;
+    max-width: 900px;
+    background: rgba(10, 10, 20, 0.85);
+    backdrop-filter: blur(25px);
+    border-radius: 40px;
+    padding: 50px;
+    box-shadow: 
+        0 25px 50px rgba(0, 0, 0, 0.5),
+        0 0 200px rgba(255, 215, 0, 0.1),
+        inset 0 1px 0 rgba(255, 255, 255, 0.2);
+    border: 1px solid rgba(255, 215, 0, 0.2);
+    position: relative;
+    overflow: hidden;
 }
 
-/* ICON */
-.vip-btn img{
-    width:28px;
-    vertical-align:middle;
-    margin-right:10px;
+/* VIỀN VIP */
+.vip-container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border-radius: 40px;
+    padding: 3px;
+    background: linear-gradient(45deg, 
+        #ffd700 0%, 
+        #ff69b4 25%, 
+        #00ffff 50%, 
+        #ff69b4 75%, 
+        #ffd700 100%);
+    -webkit-mask: 
+        linear-gradient(#fff 0 0) content-box, 
+        linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    z-index: -1;
+    opacity: 0.7;
+    animation: borderRotate 10s linear infinite;
 }
 
-/* COLOR SHIFT */
-@keyframes colorShift{
-    0%{color:#ffd700;}
-    33%{color:#ff4ecd;}
-    66%{color:#36d1dc;}
-    100%{color:#00ff9c;}
+@keyframes borderRotate {
+    0% {
+        filter: hue-rotate(0deg);
+    }
+    100% {
+        filter: hue-rotate(360deg);
+    }
 }
 
-/* GLOW EFFECT */
-.vip-btn::before{
-    content:"";
-    position:absolute;
-    inset:0;
-    background:linear-gradient(120deg,transparent,rgba(255,215,0,0.3),transparent);
-    transform:translateX(-100%);
-    animation:shine 3s infinite;
+/* VIP HEADER */
+.vip-header {
+    text-align: center;
+    margin-bottom: 50px;
+    position: relative;
 }
 
-@keyframes shine{
-    0%{transform:translateX(-100%);}
-    60%{transform:translateX(100%);}
-    100%{transform:translateX(100%);}
+.vip-avatar-wrapper {
+    position: relative;
+    display: inline-block;
+    margin-bottom: 30px;
 }
 
-/* FOOTER */
-.vip-footer{
-    margin-top:30px;
-    text-align:center;
-    font-size:12px;
-    opacity:0.6;
+.vip-avatar-frame {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    padding: 8px;
+    background: linear-gradient(45deg, #ffd700, #ff69b4, #00ffff, #ff69b4, #ffd700);
+    background-size: 300% 300%;
+    animation: gradientShift 5s ease infinite, rotateFrame 20s linear infinite;
+    box-shadow: 
+        0 0 50px rgba(255, 215, 0, 0.5),
+        0 0 100px rgba(255, 105, 180, 0.3);
+    position: relative;
+}
+
+@keyframes gradientShift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+@keyframes rotateFrame {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.vip-avatar-frame::before {
+    content: '';
+    position: absolute;
+    top: -10px;
+    left: -10px;
+    right: -10px;
+    bottom: -10px;
+    border-radius: 50%;
+    border: 2px dashed rgba(255, 215, 0, 0.5);
+    animation: spinReverse 15s linear infinite;
+    z-index: -1;
+}
+
+@keyframes spinReverse {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(-360deg); }
+}
+
+.vip-avatar-frame img {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 5px solid rgba(0, 0, 0, 0.5);
+}
+
+/* VIP CROWN */
+.vip-crown {
+    position: absolute;
+    top: -25px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 60px;
+    color: #ffd700;
+    text-shadow: 
+        0 0 20px #ffd700,
+        0 0 40px #ffd700;
+    animation: crownGlow 2s ease-in-out infinite alternate;
+    z-index: 2;
+}
+
+@keyframes crownGlow {
+    0% {
+        transform: translateX(-50%) translateY(0px);
+        text-shadow: 0 0 20px #ffd700, 0 0 40px #ffd700;
+    }
+    100% {
+        transform: translateX(-50%) translateY(-5px);
+        text-shadow: 0 0 30px #ffd700, 0 0 60px #ffd700, 0 0 80px #ffd700;
+    }
+}
+
+/* VIP TITLE */
+.vip-title {
+    font-size: 42px;
+    font-weight: 900;
+    margin-bottom: 15px;
+    background: linear-gradient(to right, #ffd700, #ff69b4, #00ffff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    position: relative;
+    display: inline-block;
+}
+
+.vip-title::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background: linear-gradient(to right, #ffd700, #ff69b4, #00ffff);
+    border-radius: 3px;
+}
+
+.vip-desc {
+    font-size: 18px;
+    opacity: 0.9;
+    max-width: 600px;
+    margin: 0 auto;
+    line-height: 1.6;
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 20px;
+    border-left: 4px solid #ffd700;
+    border-right: 4px solid #ff69b4;
+}
+
+/* VIP BADGE */
+.vip-badge {
+    display: inline-block;
+    background: linear-gradient(45deg, #ffd700, #ff4500);
+    color: #000;
+    font-weight: 900;
+    padding: 10px 25px;
+    border-radius: 30px;
+    font-size: 16px;
+    margin-top: 20px;
+    box-shadow: 0 10px 20px rgba(255, 215, 0, 0.3);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    animation: badgePulse 3s infinite;
+}
+
+@keyframes badgePulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+}
+
+/* VIP BUTTONS GRID */
+.vip-buttons-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 25px;
+    margin: 50px 0;
+}
+
+/* VIP BUTTON */
+.vip-btn {
+    background: rgba(20, 20, 40, 0.7);
+    border-radius: 25px;
+    overflow: hidden;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    position: relative;
+    cursor: pointer;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(255, 215, 0, 0.2);
+    height: 280px;
+    display: flex;
+    flex-direction: column;
+    text-decoration: none;
+    color: inherit;
+}
+
+.vip-btn:hover {
+    transform: translateY(-15px) scale(1.03);
+    box-shadow: 
+        0 25px 50px rgba(0, 0, 0, 0.4),
+        0 0 50px rgba(255, 215, 0, 0.2);
+    border-color: rgba(255, 215, 0, 0.5);
+}
+
+.vip-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(45deg, transparent, rgba(255, 215, 0, 0.1), transparent);
+    transform: translateX(-100%);
+    transition: transform 0.6s;
+}
+
+.vip-btn:hover::before {
+    transform: translateX(100%);
+}
+
+/* VIP BUTTON IMAGE - SỬ DỤNG ẢNH GITHUB */
+.vip-btn-image {
+    height: 60%;
+    overflow: hidden;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.vip-btn-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.vip-btn:hover .vip-btn-image img {
+    transform: scale(1.1);
+}
+
+.vip-btn-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to bottom, transparent 40%, rgba(0, 0, 0, 0.8) 100%);
+}
+
+/* VIP BUTTON CONTENT */
+.vip-btn-content {
+    padding: 25px;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: relative;
+    z-index: 1;
+}
+
+.vip-btn-icon {
+    font-size: 32px;
+    margin-bottom: 15px;
+    background: linear-gradient(45deg, #ffd700, #ff69b4);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.vip-btn-title {
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 10px;
+    color: #fff;
+}
+
+.vip-btn-desc {
+    font-size: 14px;
+    opacity: 0.8;
+    line-height: 1.5;
+}
+
+/* VIP BUTTON COLORS - MÀU SẮC KHÁC NHAU CHO TỪNG NÚT */
+.vip-btn:nth-child(1) {
+    border-top: 5px solid #ffd700;
+}
+.vip-btn:nth-child(2) {
+    border-top: 5px solid #ff69b4;
+}
+.vip-btn:nth-child(3) {
+    border-top: 5px solid #00ffff;
+}
+.vip-btn:nth-child(4) {
+    border-top: 5px solid #9d4edd;
+}
+.vip-btn:nth-child(5) {
+    border-top: 5px solid #ff6b6b;
+}
+.vip-btn:nth-child(6) {
+    border-top: 5px solid #4ecdc4;
+}
+
+/* VIP FOOTER */
+.vip-footer {
+    text-align: center;
+    margin-top: 50px;
+    padding-top: 30px;
+    border-top: 1px solid rgba(255, 215, 0, 0.2);
+    font-size: 14px;
+    opacity: 0.7;
+    position: relative;
+}
+
+.vip-footer::before {
+    content: '✦ ✦ ✦';
+    position: absolute;
+    top: -15px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(10, 10, 20, 0.85);
+    padding: 0 20px;
+    font-size: 20px;
+    color: #ffd700;
+    letter-spacing: 10px;
+}
+
+/* VIP SECURITY BADGE */
+.vip-security {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    margin-top: 20px;
+    font-size: 14px;
+}
+
+.vip-security i {
+    color: #00ffff;
+    animation: lockGlow 2s infinite alternate;
+}
+
+@keyframes lockGlow {
+    0% { text-shadow: 0 0 5px #00ffff; }
+    100% { text-shadow: 0 0 15px #00ffff, 0 0 25px #00ffff; }
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+    .vip-container {
+        padding: 30px 20px;
+        margin: 15px;
+        border-radius: 30px;
+    }
+    
+    .vip-avatar-frame {
+        width: 150px;
+        height: 150px;
+    }
+    
+    .vip-title {
+        font-size: 32px;
+    }
+    
+    .vip-desc {
+        font-size: 16px;
+        padding: 15px;
+    }
+    
+    .vip-buttons-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+    
+    .vip-btn {
+        height: 250px;
+    }
+}
+
+/* SCROLLBAR VIP */
+::-webkit-scrollbar {
+    width: 12px;
+}
+
+::-webkit-scrollbar-track {
+    background: rgba(10, 10, 20, 0.8);
+}
+
+::-webkit-scrollbar-thumb {
+    background: linear-gradient(to bottom, #ffd700, #ff69b4);
+    border-radius: 6px;
+    border: 3px solid rgba(10, 10, 20, 0.8);
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(to bottom, #ffed4e, #ff8ac9);
+}
+
+/* LOADING OPTIMIZATION */
+.vip-btn-image {
+    background: rgba(0, 0, 0, 0.2);
 }
 </style>
 </head>
 
 <body>
 
+<!-- HIỆU ỨNG NỀN VIP TỐI GIẢN -->
+<div class="vip-bg">
+    <div class="vip-pattern"></div>
+</div>
+
+<!-- VIP SECTION -->
+<div class="vip-section">
 <div class="vip-container">
 
-    <!-- AVATAR -->
-    <div class="vip-avatar">
-        <img src="https://raw.githubusercontent.com/teoscrvn/-nh/main/media_1768317253%20(2).png">
+    <!-- VIP HEADER -->
+    <div class="vip-header">
+        <div class="vip-avatar-wrapper">
+            <div class="vip-avatar-frame">
+                <!-- 🍎 AVATAR CHÍNH -->
+                <img src="https://raw.githubusercontent.com/teoscrvn/-nh/main/media_1768317253%20(2).png" 
+                     alt="VIP Avatar"
+                     loading="lazy">
+            </div>
+            <div class="vip-crown">👑</div>
+        </div>
+        
+        <!-- 🍎 TIÊU ĐỀ VIP -->
+        <h1 class="vip-title">🔐 VIP PREMIUM - TÉO SCRVN</h1>
+        
+        <!-- 🍎 MÔ TẢ VIP -->
+        <div class="vip-desc">Khu vực đặc biệt dành riêng cho thành viên VIP. Truy cập vào tài nguyên độc quyền, script cao cấp và công cụ không có ở bất kỳ đâu.</div>
+        <div class="vip-badge">EXCLUSIVE VIP ACCESS</div>
     </div>
 
-    <div class="vip-title">🔐 VIP NỘI BỘ – TÉO SCRVN</div>
-    <div class="vip-desc">Khu vực riêng – không công khai – không hướng dẫn 🤫</div>
+    <!-- VIP BUTTONS GRID -->
+    <div class="vip-buttons-grid">
+        
+        <!-- NÚT 1: SCRIPT ROBLOX VIP -->
+        <!-- 🍎 LINK: https://example.com/vip-script -->
+        <!-- 🍎 ẢNH: GitHub raw -->
+        <!-- 🍎 TÊN: Script Roblox VIP -->
+        <!-- 🍎 MÔ TẢ: Script Roblox độc quyền -->
+        <a href="https://teoscrvn.github.io/Notewepteo/?data=N4IgLglmA2CmIC4QGFoVgOzAAgLaG28CbAYwAsB7bANwgAdsEAREAGhGPK0zEREdmhgAhgA0qGAOYAKMgFuMpbGFKBLvGIBKAK60AJkLCwEAHQwAmAGwB6AIwmTpMGFoBnBJctVN5MAqEKAdBy4lkIAWjoAKnYYyOQ6sCLUkthSkoCzeMTYAEaAq3iS6tjaegYI2ACslmXRDk6u7p7evgFBlgCaAGoS5NERAE4QXRhJ0umZufmFuvqGJhVVGPaOLm4eXj6kfqSB5MFZdCKsIOQA7hiwvbxgAJeUQjq4EBiHztq05L08SIfEvbDTOohrAB2IEABgAzKDTGUACwATgsMLYVHOzggnF4pn8oMOmA48QuSGgAC8ALTOMD9SQgAC+QA" class="vip-btn" target="_blank">
+            <div class="vip-btn-image">
+                <!-- 🍎 ẢNH NÚT 1 -->
+                <img src="https://raw.githubusercontent.com/teoscrvn/-nh/main/media_1768317253%20(2).png" alt="Script Roblox">
+                <div class="vip-btn-overlay"></div>
+            </div>
+            <div class="vip-btn-content">
+                <div class="vip-btn-icon">🍎</div>
+                <div class="vip-btn-title">🍎Các client roblox mới nhất k vượt🍏</div>
+                <div class="vip-btn-desc">Script Roblox độc quyền chỉ có tại VIP</div>
+            </div>
+        </a>
 
-    <!-- BUTTONS -->
-    <div class="vip-buttons">
+        <!-- NÚT 2: TOOL HACK VIP -->
+        <!-- 🍎 LINK: https://example.com/vip-tool -->
+        <!-- 🍎 ẢNH: GitHub raw -->
+        <!-- 🍎 TÊN: Tool Hack VIP -->
+        <!-- 🍎 MÔ TẢ: Tool hack game mới nhất -->
+        <a href="https://example.com/vip-tool" class="vip-btn" target="_blank">
+            <div class="vip-btn-image">
+                <!-- 🍎 ẢNH NÚT 2 -->
+                <img src="https://raw.githubusercontent.com/teoscrvn/-nh/main/media_1768317253%20(2).png" alt="Tool Hack">
+                <div class="vip-btn-overlay"></div>
+            </div>
+            <div class="vip-btn-content">
+                <div class="vip-btn-icon">⚡</div>
+                <div class="vip-btn-title">lười làm</div>
+                <div class="vip-btn-desc">Tool hack game mới nhất 2024</div>
+            </div>
+        </a>
 
-        <!-- NÚT VIP CHÍNH -->
-        <div class="vip-btn" onclick="location.href='#'">
-            <span>👑 VÀO LINK VIP ĐẶC BIỆT</span>
-        </div>
+        <!-- NÚT 3: FILE CÀI ĐẶT -->
+        <!-- 🍎 LINK: https://example.com/vip-install -->
+        <!-- 🍎 ẢNH: GitHub raw -->
+        <!-- 🍎 TÊN: File Cài Đặt -->
+        <!-- 🍎 MÔ TẢ: File cài đặt đầy đủ -->
+        <a href="https://example.com/vip-install" class="vip-btn" target="_blank">
+            <div class="vip-btn-image">
+                <!-- 🍎 ẢNH NÚT 3 -->
+                <img src="https://raw.githubusercontent.com/teoscrvn/-nh/main/media_1768317253%20(2).png" alt="File Cài Đặt">
+                <div class="vip-btn-overlay"></div>
+            </div>
+            <div class="vip-btn-content">
+                <div class="vip-btn-icon">📂</div>
+                <div class="vip-btn-title">lười làm :D</div>
+                <div class="vip-btn-desc">lười làm</div>
+            </div>
+        </a>
 
-        <!-- SHARE / FILE -->
-        <div class="vip-btn" onclick="location.href='#'">
-            <span>📂 File nội bộ – script ngon</span>
-        </div>
+        <!-- NÚT 4: HƯỚNG DẪN CHI TIẾT -->
+        <!-- 🍎 LINK: https://example.com/vip-guide -->
+        <!-- 🍎 ẢNH: GitHub raw -->
+        <!-- 🍎 TÊN: Hướng Dẫn Chi Tiết -->
+        <!-- 🍎 MÔ TẢ: Hướng dẫn sử dụng chi tiết -->
+        <a href="https://example.com/vip-guide" class="vip-btn" target="_blank">
+            <div class="vip-btn-image">
+                <!-- 🍎 ẢNH NÚT 4 -->
+                <img src="https://raw.githubusercontent.com/teoscrvn/-nh/main/media_1768317253%20(2).png" alt="Hướng Dẫn">
+                <div class="vip-btn-overlay"></div>
+            </div>
+            <div class="vip-btn-content">
+                <div class="vip-btn-icon">📖</div>
+                <div class="vip-btn-title">lười làm :D</div>
+                <div class="vip-btn-desc">Hướng dẫn sử dụng chi tiết từ A-Z</div>
+            </div>
+        </a>
 
-        <div class="vip-btn" onclick="location.href='#'">
-            <span>🔥 Share tài nguyên VIP</span>
-        </div>
+        <!-- NÚT 5: VIDEO TUTORIAL -->
+        <!-- 🍎 LINK: https://example.com/vip-video -->
+        <!-- 🍎 ẢNH: GitHub raw -->
+        <!-- 🍎 TÊN: Video Tutorial -->
+        <!-- 🍎 MÔ TẢ: Video hướng dẫn trực quan -->
+        <a href="https://example.com/vip-video" class="vip-btn" target="_blank">
+            <div class="vip-btn-image">
+                <!-- 🍎 ẢNH NÚT 5 -->
+                <img src="https://raw.githubusercontent.com/teoscrvn/-nh/main/media_1768317253%20(2).png" alt="Video Tutorial">
+                <div class="vip-btn-overlay"></div>
+            </div>
+            <div class="vip-btn-content">
+                <div class="vip-btn-icon">🎥</div>
+                <div class="vip-btn-title">lười làm :D</div>
+                <div class="vip-btn-desc">Video hướng dẫn trực quan dễ hiểu</div>
+            </div>
+        </a>
 
-        <div class="vip-btn" onclick="location.href='#'">
-            <span>🧠 Tool riêng – không public</span>
-        </div>
+        <!-- NÚT 6: GROUP VIP -->
+        <!-- 🍎 LINK: https://example.com/vip-group -->
+        <!-- 🍎 ẢNH: GitHub raw -->
+        <!-- 🍎 TÊN: Group VIP -->
+        <!-- 🍎 MÔ TẢ: Tham gia group VIP -->
+        <a href="https://example.com/vip-group" class="vip-btn" target="_blank">
+            <div class="vip-btn-image">
+                <!-- 🍎 ẢNH NÚT 6 -->
+                <img src="https://raw.githubusercontent.com/teoscrvn/-nh/main/media_1768317253%20(2).png" alt="Group VIP">
+                <div class="vip-btn-overlay"></div>
+            </div>
+            <div class="vip-btn-content">
+                <div class="vip-btn-icon">👥</div>
+                <div class="vip-btn-title">lười làm :D</div>
+                <div class="vip-btn-desc">Tham gia group VIP để nhận hỗ trợ</div>
+            </div>
+        </a>
 
     </div>
 
+    <!-- VIP FOOTER -->
     <div class="vip-footer">
-        © VIP AREA • Access Limited • 🤫
+        <!-- 🍎 THÔNG TIN FOOTER -->
+        <p>© 2026 VIP PREMIUM - TÉO SCRVN. Tất cả nội dung được bảo vệ bản quyền.</p>
+        <div class="vip-security">
+            <i class="fas fa-shield-alt"></i>
+            <span>TRUY CẬP ĐƯỢC BẢO MẬT & MÃ HÓA</span>
+            <i class="fas fa-shield-alt"></i>
+        </div>
     </div>
 
 </div>
+</div>
+
+<script>
+// Hiệu ứng gõ chữ cho tiêu đề VIP
+document.addEventListener('DOMContentLoaded', function() {
+    const title = document.querySelector('.vip-title');
+    const originalText = title.textContent;
+    title.textContent = '';
+    
+    let i = 0;
+    const typeWriter = () => {
+        if (i < originalText.length) {
+            title.textContent += originalText.charAt(i);
+            i++;
+            setTimeout(typeWriter, 50);
+        }
+    };
+    
+    // Bắt đầu hiệu ứng sau 0.5 giây
+    setTimeout(typeWriter, 500);
+    
+    // Hiệu ứng hover cho các nút VIP
+    const vipButtons = document.querySelectorAll('.vip-btn');
+    vipButtons.forEach(button => {
+        button.addEventListener('mouseenter', function() {
+            const icon = this.querySelector('.vip-btn-icon');
+            icon.style.transform = 'scale(1.2)';
+            icon.style.transition = 'transform 0.3s ease';
+        });
+        
+        button.addEventListener('mouseleave', function() {
+            const icon = this.querySelector('.vip-btn-icon');
+            icon.style.transform = 'scale(1)';
+        });
+    });
+    
+    // Hiệu ứng ánh sáng ngẫu nhiên cho viền container
+    const container = document.querySelector('.vip-container');
+    setInterval(() => {
+        const hue = Math.floor(Math.random() * 360);
+        container.style.boxShadow = 
+            `0 25px 50px rgba(0, 0, 0, 0.5),
+             0 0 200px hsla(${hue}, 100%, 50%, 0.1),
+             inset 0 1px 0 rgba(255, 255, 255, 0.2)`;
+    }, 3000);
+});
+
+// Hiệu ứng khi cuộn trang
+window.addEventListener('scroll', function() {
+    const scrolled = window.pageYOffset;
+    const rate = scrolled * -0.5;
+    document.querySelector('.vip-bg').style.transform = `translateY(${rate}px)`;
+});
+</script>
 
 </body>
 </html>
