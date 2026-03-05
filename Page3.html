@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🔥 Free Fire HUB – Téo SCRVN</title>
+    <style>
+        /* ===== RESET & TOÀN CỤC ===== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Courier New', 'Segoe UI', monospace;
+            height: 100vh;
+            overflow-y: auto;
+            background: #0a0f0f;
+            color: #0f0;
+            position: relative;
+        }
+
+        /* Nền ma trận (giữ lại một chút cho vui) */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: repeating-linear-gradient(0deg, rgba(0, 255, 0, 0.03) 0px, rgba(0, 0, 0, 0.5) 1px, transparent 2px);
+            pointer-events: none;
+            z-index: -2;
+            animation: scan 8s linear infinite;
+        }
+
+        @keyframes scan {
+            0% { background-position: 0 0; }
+            100% { background-position: 0 20px; }
+        }
+
+        /* ===== HIỆU ỨNG FREE FIRE BAY (PARTICLE) ===== */
+        .ff-float {
+            position: fixed;
+            bottom: -50px;
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 24px;
+            font-weight: bold;
+            text-shadow: 0 0 10px currentColor;
+            pointer-events: none;
+            z-index: -1;
+            white-space: nowrap;
+            animation: floatUp linear infinite;
+        }
+
+        @keyframes floatUp {
+            0% {
+                transform: translateY(0) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.8;
+            }
+            90% {
+                opacity: 0.8;
+            }
+            100% {
+                transform: translateY(-120vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        /* ===== CONTAINER CHÍNH ===== */
+        .section {
+            width: 100%;
+            min-height: 100%;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+        }
+
+        .container {
+            max-width: 600px;
+            width: 100%;
+            background: rgba(0, 20, 0, 0.6);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 2px solid #0f0;
+            border-radius: 30px;
+            padding: 30px 25px;
+            box-shadow: 
+                0 0 30px #0f0,
+                inset 0 0 20px rgba(0, 255, 0, 0.2);
+            transition: transform 0.3s, box-shadow 0.3s;
+            animation: fadeInUp 0.8s ease;
+        }
+
+        .container:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 0 50px #0f0, inset 0 0 30px #0f0;
+        }
+
+        @keyframes fadeInUp {
+            0% { opacity: 0; transform: translateY(40px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+
+        /* ===== HEADER & AVATAR ===== */
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            position: relative;
+        }
+
+        .avatar-wrapper {
+            position: relative;
+            display: inline-block;
+            margin-bottom: 20px;
+        }
+
+        .avatar-wrapper::before {
+            content: '';
+            position: absolute;
+            top: -15px;
+            left: -15px;
+            right: -15px;
+            bottom: -15px;
+            border-radius: 50%;
+            border: 2px dashed #0f0;
+            animation: spin 10s linear infinite;
+            opacity: 0.6;
+            filter: blur(1px);
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .avatar-frame {
+            width: 140px;
+            height: 140px;
+            border-radius: 50%;
+            padding: 5px;
+            background: linear-gradient(145deg, #f00, #ff0, #0f0);
+            box-shadow: 0 0 30px #f00;
+            position: relative;
+            z-index: 2;
+            transition: transform 0.3s;
+        }
+
+        .avatar-frame:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 50px #ff0;
+        }
+
+        .avatar-frame img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 50%;
+            border: 4px solid #000;
+            background: #111;
+        }
+
+        .name {
+            font-size: 2.2rem;
+            font-weight: 900;
+            color: #0f0;
+            text-shadow: 0 0 10px #0f0, 0 0 20px #0f0;
+            margin-bottom: 8px;
+            letter-spacing: 2px;
+            animation: flicker 3s infinite;
+        }
+
+        @keyframes flicker {
+            0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% { opacity: 1; }
+            20%, 24%, 55% { opacity: 0.4; }
+        }
+
+        .desc {
+            font-size: 1rem;
+            background: #000;
+            padding: 12px 20px;
+            border-radius: 40px;
+            display: inline-block;
+            border: 1px solid #0f0;
+            color: #0f0;
+            max-width: 90%;
+            margin: 0 auto;
+            box-shadow: 0 0 15px #0f0;
+            font-family: 'Courier New', monospace;
+        }
+
+        /* ===== CÁC NÚT ===== */
+        .buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+            margin: 35px 0;
+        }
+
+        .button {
+            display: block;
+            text-decoration: none;
+            color: #0f0;
+            border-radius: 30px;
+            background: rgba(0, 20, 0, 0.8);
+            border: 2px solid #0f0;
+            box-shadow: 0 0 15px #0f0;
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .button:hover {
+            transform: translateY(-6px) scale(1.02);
+            border-color: #ff0;
+            box-shadow: 0 0 30px #ff0;
+        }
+
+        .button-content {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 18px 22px;
+            background: linear-gradient(90deg, transparent, rgba(0, 255, 0, 0.1));
+        }
+
+        .button-icon {
+            width: 55px;
+            height: 55px;
+            background: #000;
+            border: 2px solid #0f0;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            box-shadow: 0 0 15px #0f0;
+            transition: 0.2s;
+        }
+
+        .button:hover .button-icon {
+            transform: rotate(5deg) scale(1.1);
+            border-color: #ff0;
+            box-shadow: 0 0 25px #ff0;
+        }
+
+        .button-text {
+            flex: 1;
+            font-weight: 700;
+            font-size: 1.2rem;
+            letter-spacing: 1px;
+            text-shadow: 0 0 5px #0f0;
+            color: #cfc;
+        }
+
+        .button-image {
+            width: 100%;
+            height: 120px;
+            border-top: 1px dashed #0f0;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(0, 0, 0, 0.6);
+            transition: height 0.3s;
+        }
+
+        .button-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.9;
+            transition: opacity 0.3s, transform 0.3s;
+        }
+
+        .button:hover .button-image {
+            height: 140px;
+        }
+
+        .button:hover .button-image img {
+            opacity: 1;
+            transform: scale(1.05);
+            filter: drop-shadow(0 0 8px #0f0);
+        }
+
+        .back-btn {
+            border-color: #f0f;
+            box-shadow: 0 0 15px #f0f;
+        }
+        .back-btn .button-icon {
+            border-color: #f0f;
+            box-shadow: 0 0 15px #f0f;
+        }
+
+        /* ===== FOOTER ===== */
+        .footer {
+            text-align: center;
+            margin-top: 30px;
+            padding-top: 20px;
+            font-size: 0.9rem;
+            color: #0f0;
+            border-top: 2px solid #0f0;
+            font-family: 'Courier New', monospace;
+        }
+
+        .footer span {
+            background: #000;
+            padding: 4px 15px;
+            border-radius: 40px;
+            border: 1px solid #0f0;
+        }
+
+        /* Responsive */
+        @media (max-width: 550px) {
+            .container {
+                padding: 20px 15px;
+            }
+            .avatar-frame {
+                width: 120px;
+                height: 120px;
+            }
+            .name {
+                font-size: 1.8rem;
+            }
+            .button-content {
+                padding: 15px 18px;
+            }
+            .button-icon {
+                width: 48px;
+                height: 48px;
+                font-size: 22px;
+            }
+            .button-text {
+                font-size: 1rem;
+            }
+            .button-image {
+                height: 100px;
+            }
+            .button:hover .button-image {
+                height: 120px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Container chính -->
+    <div class="section">
+        <div class="container">
+
+            <!-- HEADER -->
+            <div class="header">
+                <div class="avatar-wrapper">
+                    <div class="avatar-frame">
+                        <!-- THAY: Link ảnh avatar (đã dùng lại link cũ) -->
+                        <img src="https://raw.githubusercontent.com/teoscrvn/-nh/main/media_1768317253%20(2).png" alt="Avatar">
+                    </div>
+                </div>
+                <!-- THAY: Tên và mô tả -->
+                <div class="name">🔥 TÉO FREE FIRE 🔥</div>
+                <div class="desc">SHEAR ĐỒ - BYPASS - HACK LÔNG</div>
+            </div>
+
+            <!-- CÁC NÚT -->
+            <div class="buttons">
+
+                <!-- NÚT QUAY LẠI -->
+                <a href="index.html" class="button back-btn">
+                    <div class="button-content">
+                        <div class="button-icon">⬅️</div>
+                        <div class="button-text">QUAY LẠI TRANG CHÍNH</div>
+                    </div>
+                    <div class="button-image">
+                        <!-- THAY: ảnh cho nút này -->
+                        <img src="https://raw.githubusercontent.com/teoscrvn/-nh/refs/heads/main/image-2.jpg" alt="tool image">
+                    </div>
+                </a>
+
+                <!-- NÚT 1: ĐỊNH VỊ SÚNG -->
+                <a href="https://vuotnhanh.com/98N9" class="button">
+                    <div class="button-content">
+                        <div class="button-icon">🔫</div>
+                        <div class="button-text">ĐỊNH VỊ SÚNG FREE FIRE NHÌN XUYÊN KEO (ANTIBAN)</div>
+                    </div>
+                    <div class="button-image">
+                        <img src="https://raw.githubusercontent.com/teoscrvn/-nh/refs/heads/main/Screenshot_2026-03-05-09-17-39-52_998d3425f9e75a0428f0fabdce419960.jpg" alt="súng ff">
+                    </div>
+                </a>
+
+                
+
+            <!-- FOOTER -->
+            <div class="footer">
+                <span>© Téo SCRVN 🇻🇳 | HACKER FREE FIRE</span>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- HIỆU ỨNG FREE FIRE BAY LÊN -->
+    <script>
+        (function() {
+            const messages = [
+                "🔥", "💎", "🔫", "<\>", "=,™$", "👑", "💀", "^><",
+                "BOOYAH", "HEADSHOT", "FREE FIRE", "FF", "AIMBOT",
+                "WALLHACK", "ANTIBAN", "BYPASS", "HACK", "SHEAR"
+            ];
+            const colors = ["#0f0", "#ff0", "#f00", "#0ff", "#f0f", "#ff8800"];
+
+            for (let i = 0; i < 30; i++) {
+                const el = document.createElement('div');
+                el.className = 'ff-float';
+                const content = messages[Math.floor(Math.random() * messages.length)];
+                el.textContent = content;
+                el.style.left = Math.random() * 100 + '%';
+                el.style.animationDuration = (Math.random() * 10 + 8) + 's'; // 8-18s
+                el.style.animationDelay = Math.random() * 5 + 's';
+                el.style.fontSize = (Math.random() * 24 + 16) + 'px';
+                el.style.color = colors[Math.floor(Math.random() * colors.length)];
+                el.style.opacity = 0.7;
+                el.style.fontWeight = 'bold';
+                el.style.textShadow = '0 0 10px currentColor';
+                document.body.appendChild(el);
+            }
+        })();
+    </script>
+</body>
+</html>
