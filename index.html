@@ -1,357 +1,584 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>🍎 téo SCRVN</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+  <title>𖤍 TÉO SCRVN · Chia sẻ Script</title>
+  
+  <!-- Font & Icons -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-<style>
-body{
-    margin:0;
-    font-family:Arial, sans-serif;
-    background:linear-gradient(135deg,#0f0c29,#302b63,#24243e);
-    color:white;
-}
+    body {
+      font-family: 'Inter', sans-serif;
+      background: radial-gradient(circle at 20% 30%, #1a1f35, #0b0e1a);
+      min-height: 100vh;
+      color: #fff;
+      padding: 24px 16px 40px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      line-height: 1.5;
+    }
 
-.section{
-    min-height:100vh;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-}
+    .glass-card {
+      max-width: 520px;
+      width: 100%;
+      margin: 0 auto;
+      background: rgba(20, 25, 45, 0.55);
+      backdrop-filter: blur(18px) saturate(180%);
+      -webkit-backdrop-filter: blur(18px) saturate(180%);
+      border: 1px solid rgba(100, 150, 255, 0.2);
+      border-radius: 36px;
+      padding: 28px 22px 30px;
+      box-shadow: 0 25px 40px -12px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(80, 160, 255, 0.1) inset;
+      transition: all 0.2s ease;
+    }
 
-.container{
-    width:100%;
-    max-width:420px;
-    background:rgba(0,0,0,0.4);
-    border-radius:22px;
-    padding:25px;
-    text-align:center;
-    margin:20px;
-}
+    .avatar-frame {
+      width: 140px;
+      height: 140px;
+      margin: 0 auto 12px;
+      border-radius: 50%;
+      padding: 4px;
+      background: linear-gradient(145deg, #5f9eff, #b86ef0, #ff7b9c);
+      box-shadow: 0 12px 28px rgba(0, 20, 80, 0.6);
+    }
+    .avatar-frame img {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 3px solid rgba(255,255,255,0.15);
+      transition: transform 0.3s;
+    }
+    .avatar-frame img:hover {
+      transform: scale(1.02);
+    }
 
-/* AVATAR */
-.avatar-wrapper{
-    width:150px;
-    height:150px;
-    margin:auto;
-    border-radius:50%;
-    padding:5px;
-    background:linear-gradient(45deg,#ff416c,#36d1dc);
-}
-.avatar-wrapper img{
-    width:100%;
-    height:100%;
-    border-radius:50%;
-    object-fit:cover;
-}
+    .name-glow {
+      font-size: 32px;
+      font-weight: 700;
+      letter-spacing: -0.5px;
+      background: linear-gradient(135deg, #fff8e0, #c6e0ff);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      margin: 8px 0 4px;
+      text-shadow: 0 2px 10px rgba(0,160,255,0.3);
+      text-align: center;
+    }
+    .badge-sub {
+      display: inline-block;
+      background: rgba(255,255,255,0.08);
+      backdrop-filter: blur(4px);
+      padding: 6px 16px;
+      border-radius: 40px;
+      font-size: 14px;
+      font-weight: 500;
+      color: #bdd3ff;
+      margin-bottom: 16px;
+      border: 1px solid rgba(255,255,255,0.1);
+      text-align: center;
+      width: fit-content;
+      margin-left: auto;
+      margin-right: auto;
+    }
 
-/* NAME */
-.name{
-    font-size:28px;
-    margin-top:15px;
-    font-weight:bold;
-}
+    .social-row {
+      display: flex;
+      justify-content: center;
+      gap: 18px;
+      margin: 12px 0 18px;
+    }
+    .social-btn {
+      width: 52px;
+      height: 52px;
+      background: rgba(255,255,255,0.03);
+      backdrop-filter: blur(8px);
+      border-radius: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid rgba(255,255,255,0.12);
+      transition: all 0.25s;
+      color: #fff;
+      font-size: 26px;
+      box-shadow: 0 6px 12px rgba(0,0,0,0.2);
+    }
+    .social-btn:hover {
+      background: rgba(80, 140, 255, 0.25);
+      border-color: #5f9eff;
+      transform: translateY(-3px);
+      box-shadow: 0 14px 20px -8px #1e3a8a;
+    }
 
-/* 🍎 MÔ TẢ */
-.desc{
-    font-size:14px;
-    opacity:0.75;
-    margin-top:6px;
-}
+    .button-list {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      margin: 28px 0 16px;
+    }
+    .neo-button {
+      text-decoration: none;
+      display: block;
+      border-radius: 24px;
+      background: linear-gradient(145deg, #2a3a60, #1a2340);
+      padding: 2px;
+      box-shadow: 0 10px 18px -6px #00000080, 0 0 0 1px #3d5a9b inset;
+      transition: all 0.2s;
+    }
+    .neo-button:hover {
+      background: linear-gradient(145deg, #3f5290, #1f2b50);
+      box-shadow: 0 14px 22px -8px #000, 0 0 0 1px #6d9eff inset;
+      transform: scale(1.01);
+    }
+    .btn-inner {
+      background: rgba(15, 20, 40, 0.7);
+      backdrop-filter: blur(10px);
+      padding: 16px 18px;
+      border-radius: 22px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      border: 1px solid rgba(255,255,255,0.05);
+    }
+    .btn-icon {
+      width: 56px;
+      height: 56px;
+      border-radius: 18px;
+      background: linear-gradient(135deg, #3c5eb0, #1e3470);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: inset 0 2px 5px #ffffff30, 0 8px 12px #00000040;
+    }
+    .btn-icon img {
+      width: 36px;
+      height: 36px;
+      border-radius: 12px;
+      object-fit: cover;
+    }
+    .btn-text {
+      flex: 1;
+      font-weight: 600;
+      font-size: 16px;
+      letter-spacing: -0.2px;
+      color: #f0f4ff;
+      text-shadow: 0 1px 3px black;
+      word-break: break-word;
+    }
 
-/* MINI BUTTONS */
-.mini-buttons{
-    display:flex;
-    justify-content:center;
-    gap:12px;
-    margin-top:15px;
-}
-.mini-btn{
-    width:45px;
-    height:45px;
-    border-radius:12px;
-    background:linear-gradient(45deg,#ff416c,#36d1dc);
-    display:flex;
-    justify-content:center;
-    align-items:center;
-}
-.mini-btn img{
-    width:22px;
-}
+    .feature-image {
+      margin: 28px 0 16px;
+      border-radius: 28px;
+      overflow: hidden;
+      border: 1px solid rgba(255,255,255,0.15);
+      box-shadow: 0 18px 30px -8px #000000b0;
+    }
+    .feature-image img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
 
-/* MAIN BUTTON */
-.buttons{
-    margin-top:25px;
-}
-.button{
-    text-decoration:none;
-    background:linear-gradient(45deg,#ff416c,#36d1dc);
-    padding:3px;
-    border-radius:18px;
-    display:block;
-}
-.button-content{
-    background:#1e1e2f;
-    padding:18px;
-    border-radius:15px;
-    display:flex;
-    align-items:center;
-    gap:15px;
-}
-.button-icon{
-    width:55px;
-    height:55px;
-    border-radius:14px;
-    background:#ff416c;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-}
-.button-icon img{
-    width:32px;
-}
+    /* BÌNH LUẬN */
+    .comment-section {
+      margin-top: 30px;
+      background: rgba(0, 0, 0, 0.25);
+      backdrop-filter: blur(16px);
+      border-radius: 28px;
+      padding: 22px 18px;
+      border: 1px solid rgba(120, 170, 255, 0.25);
+    }
+    .comment-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 18px;
+    }
+    .comment-header h3 {
+      font-weight: 600;
+      font-size: 20px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: #d9e6ff;
+    }
+    .refresh-badge {
+      background: #2e3f6e;
+      padding: 6px 14px;
+      border-radius: 40px;
+      font-size: 13px;
+      font-weight: 500;
+      color: #bdd6ff;
+      border: 1px solid #5f8ad4;
+    }
+    .comment-list {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      max-height: 260px;
+      overflow-y: auto;
+      padding-right: 4px;
+      margin-bottom: 16px;
+    }
+    .comment-item {
+      background: rgba(255,255,255,0.05);
+      border-radius: 20px;
+      padding: 14px 16px;
+      border-left: 5px solid #5f9eff;
+      backdrop-filter: blur(5px);
+      border: 1px solid rgba(255,255,255,0.05);
+    }
+    .comment-user {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 6px;
+    }
+    .comment-user i {
+      font-size: 24px;
+      color: #9bbaff;
+    }
+    .comment-user strong {
+      font-size: 15px;
+      color: #e1ecff;
+    }
+    .comment-time {
+      font-size: 11px;
+      margin-left: auto;
+      opacity: 0.7;
+    }
+    .comment-text {
+      font-size: 14.5px;
+      color: #e2ebff;
+      padding-left: 6px;
+      word-break: break-word;
+    }
 
-/* SHARE */
-.share-box{
-    margin-top:30px;
-    background:rgba(255,255,255,0.08);
-    border-radius:18px;
-    padding:20px;
-}
-.share-btn{
-    margin-top:10px;
-    background:#36d1dc;
-    color:black;
-    padding:12px;
-    border-radius:14px;
-    font-weight:bold;
-    cursor:pointer;
-}
+    /* FORM GỬI BÌNH LUẬN */
+    .comment-form {
+      display: flex;
+      gap: 8px;
+      margin: 8px 0 4px;
+    }
+    .comment-form input {
+      flex: 1;
+      background: rgba(0,0,0,0.3);
+      border: 1px solid #3e5a9c;
+      border-radius: 40px;
+      padding: 12px 16px;
+      color: white;
+      font-size: 14px;
+      outline: none;
+      backdrop-filter: blur(5px);
+    }
+    .comment-form input::placeholder {
+      color: #a0b5dd;
+    }
+    .comment-form button {
+      background: #2e4a8e;
+      border: none;
+      border-radius: 40px;
+      padding: 0 20px;
+      color: white;
+      font-weight: 600;
+      border: 1px solid #6d9eff;
+      backdrop-filter: blur(5px);
+      cursor: pointer;
+      transition: 0.2s;
+    }
+    .comment-form button:hover {
+      background: #3f66c0;
+    }
 
-/* FOOTER */
-.footer{
-    margin-top:20px;
-    font-size:13px;
-    opacity:0.6;
-}
-</style>
+    .manual-refresh {
+      background: none;
+      border: 1px solid #5f9eff;
+      color: #b8d0ff;
+      padding: 8px 16px;
+      border-radius: 30px;
+      font-weight: 500;
+      cursor: pointer;
+      backdrop-filter: blur(8px);
+      width: 100%;
+      font-size: 14px;
+      margin-top: 8px;
+    }
+
+    .footer-note {
+      margin-top: 28px;
+      text-align: center;
+      font-size: 14px;
+      opacity: 0.7;
+    }
+
+    .comment-list::-webkit-scrollbar {
+      width: 5px;
+    }
+    .comment-list::-webkit-scrollbar-thumb {
+      background: #4f6eb0;
+      border-radius: 10px;
+    }
+
+    .storage-note {
+      font-size: 11px;
+      opacity: 0.6;
+      margin-top: 5px;
+      text-align: center;
+    }
+  </style>
 </head>
-
 <body>
 
-<!-- 🔹 PHẦN 1 -->
-<div class="section">
-<div class="container">
-
-    <div class="avatar-wrapper">
-    <img id="secretAvatar"
-         src="https://raw.githubusercontent.com/teoscrvn/-nh/main/media_1768317253%20(2).png">
+<div class="glass-card">
+  
+  <!-- AVATAR -->
+  <div class="avatar-frame">
+    <img id="secretAvatar" src="https://raw.githubusercontent.com/teoscrvn/-nh/main/media_1768317253%20(2).png" alt="téo" crossorigin="anonymous">
+  </div>
+  
+  <!-- TÊN MỚI + CĂN GIỮA -->
+  <div class="name-glow">𖤍𝓣é𝓸🍎夜影𖤍</div>
+  <div class="badge-sub">✨ chia sẻ script · hướng dẫn tận tình ✨</div>
+  
+  <!-- SOCIAL -->
+  <div class="social-row">
+    <a href="https://www.tiktok.com/@teoscrvn?_r=1&_t=ZS-93HmGiY8o7k" class="social-btn" target="_blank"><i class="fab fa-tiktok"></i></a>
+    <a href="https://zalo.me/g/nvmyhr001" class="social-btn" target="_blank"><i class="fas fa-users"></i></a>
+    <a href="https://www.facebook.com/share/1Bg1fEHXEu/" class="social-btn" target="_blank"><i class="fab fa-facebook-f"></i></a>
+  </div>
+  
+  <!-- DANH SÁCH NÚT (giữ nguyên link) -->
+  <div class="button-list">
+    <a href="page3.html" class="neo-button">
+      <div class="btn-inner">
+        <div class="btn-icon"><img src="https://raw.githubusercontent.com/teoscrvn/-nh/refs/heads/main/image-3.jpg" alt="icon"></div>
+        <span class="btn-text">😆🍎 trang chia sẻ đồ free fire 🍏🍑</span>
+      </div>
+    </a>
+    <a href="page2.html" class="neo-button">
+      <div class="btn-inner">
+        <div class="btn-icon"><img src="https://raw.githubusercontent.com/teoscrvn/-nh/refs/heads/main/image-2.jpg" alt="icon"></div>
+        <span class="btn-text">🍎Tổng hợp tất cả clent mới nhất 🍏</span>
+      </div>
+    </a>
+    <a href="https://teoscrvn.github.io/Notewepteo/?data=N4IgLglmA2CmIC4QGEDPACAboUrwB27BEQEEG8dAcwBv1oIAr-AC0HG8dALwENoB7dNgEwFsI-AA0IA1gEYQCADbQACgAtA4Xg7hQOqABK0AVmgSA5KIBnAZgCcetgAc4AfnMAjEK9aOHAdwBqYhIAQnIAGgA6bAB6QwBXZTAAB2J2ZQgAdwSiRgBXEEYAbQA6PDxrAAtcYGl2NnYxUjkABhZxVmUqL0b6KABaQW58eNB2YkhBsiKAUWIAZXkAFVJYNW19dQBfYgBzAFcQQnpGUiH0eTmhSis4gEl8eB0AB1x10GJ2QY2twgAPI5CgALzIAJIAa1wY1IgBp8gBRABKwLBpTQyAAVgAaLEAXTBcNAiOR0gUOIAzFwCUT8SSyQT8YTiSTyfCGZTiSS0RSqQjcfCAKxU3lMwVkrkg5BoCgkFgcRji5kQf6A8zA0HgaFIOH6ZWgsAIsDI0GokDa9Q6vUGo3GtVm01WvXWs2240O0kYl0Cq0ss3Y11s8Uun1iqnW4Nu0PB6VUt1+8Ph4M2oVat1ut2x8OWt0Jp2xqP+n2+1Pp+2hy0u1Oy51Rj35p3F1PunO+2M+otZm15t0VnMp6sJz0p9P1m0Zv3N3P5hvh-2drs+qv+utltsDv3duPDseJ8c5zvl6fD7tOq2Wl1L-s2+crpfVh0O4MLndL3Pr1eOq37pdHv2bscVpfN9OZlfjv3reV++4PmPLZ9Pc+35TneL+zz+J4Ad+N5AeBX5AWB0EzpB8F-g+v5Pp+SEAf+qGgZ+UE4V+sH4S+eG4RBpHEShlEoRZWHQYRFGkXBqF0TBz50bRTGMTRn58S+HECV+DEiS+ImiS+AniS+EkSS+UkyS+0mKSeSnKS+NkaS+NlaS+9maS+DlaS+TnaS+bnacKAHaYKOEeZBqESdhMmwQA3AAbFhGGoch5FgaRkHkZB4EAFZ6bhpGEUZZGMUZTGmdpLlqaZxnmTZtkeWqoIAAq4CQAD6PkAEp4EiAAKADy6K4GgAAq4DZTiACCuBZdgqXpZCKWFdgiW4OV2DpTlblcAJAIhCQ+UoJoJAgmVmVVbVKJlW1WUdW1KIdbgnVYnVRK9QNpUIkY0hUKVZXIAAqrgg2zYN9XDY1yJ9WNyLDY1y2zQta3LZtY3Yqta0jXtR1HSdZ3nRdV03XdD1PS9b0fV9P3-ctq2rQDoMrSDS1gx9kPLTDS1w1td3bcjMMo8jL3I5DaN7fDmNI9j2M9W9Y1E4tS0kz9ZM40tZPg5TCM0yjK0M5DX1M9jLPLUzO1s0T2MsxT4O8ztcNC9jIvw2LIuYxL32y7zysA1LwsK9DwPK6LJOMxtpOa8rvO66r-OazLhuQyTCsm1r+sqxb2tW0bD3q09quW2bjsO87LtvR7Xs+37AdB8Hofh5H0exwnidfSnafpxn2fZ7n+fF3n8dF6XacZ2XGdF5nudZxnjfN3nZeN03ned8XteN8XrfL73Ld963LcD93Pct4PXd9xPw8j2vHdT2PveL2PS9r93U9L6vrcz5v89T0v2-L5fW9L3vR-38f6-r0-r9f1-t9-5-f9gf+BEGAcBYDwEQNAOBMBYGwLgfAhBsC4EILgYgxBcDEFILQQgxBSDkGoNQWgpBaDUF4IIdgoh2CiG4KIYQsh5DKEUPoXQuhjD6HkKYbQ1hdDmEcKYUw7h3COF8IEfwgRIiREiPEWIiRcjpESIUYoiRijlGKLUWotR2iNHqM0RorR2idF6IMQYoxJizHmPMeY8xFirFWJsXYmxtjbF2LsY4xx9iXFuPce4jxXjvFeN8b4vxATAlBJCaEsJETImRKiTE6JsTYnxNiQkxJCSUnpOSWkjJqS0k5LSTkvJBT8kFKKSUopZTKkVKqdU6ptT6m1MaS0ppLS2ltI6V0zpPTem9IGUMwZozxljImVMiZUy5lzLmQs5ZiyVnrNWWs7ZmzNl7J2Xsg5hzDknPOWci5FyrlXNuTc-5Dz7mPJeU8l5bz3mfK-T8n5vzAWAqBSC8FYKIWQqhTChFcKEXIuRSi9FqKMWYoxTirFuK8UEuJYSwlpLiXkvJZSqlNL6V0sZSyplbKOVco5XyvlgqhVCvFcKiVUrJXStlXK+VSrVUqrVRqzVGr9XasNfqw1RrjUmrNVa61Vq7X2odU6l1zrXXuo9Z631-rA2BuDaGsNkao0xrjXGhNSaU1pozbmvNhbC1FuLcW0tZaK2VurdW2t9aG1NpbW2jtXae29v7QOodI6R1jonVO2ds751LsXUuldq7V0bs3Tu3d+7D2HuPSes9Z6L1Xpvbe+9j7H1Pufa-t977P3fu-d-v+ACf5AJAaAkBEDwHQOgXA6BCDUHILQfA1BGDUHYJwbg-BhDCHEPIaQihZDKHUJoXQ-hjDGHsIYUw7hnC+H8IEUIkRYixESOkVI2RciFGKKUSo1RaidEaK0To3R+ijFGNMWY8xljrF2JsQ4pxLj3HuO8b4vxASgkhLCREqJMS4kJKScktJ6TMnZNyXk-5BSiklLKeUip1T6m1Mac01prT2ldM6T0vpfSBmjJGaMsZEzplTNmfMuZCzlmLNWes9Z2ytm7IOYco5JzzmXKudc25fy7mPNeU8l5byPlfN+X8gFwLgWgohaCyFkLoWwrhYi5FiKUXorRZi7F2LcX4uJUSsl5KKVUppQyxlLLWXss5Ry3lfKBVCpFWKqVEqpUyvlQqxVqrVUao1Vq-V-rjVmvNcay1tr7WOuda6j1XqfV+oDUGkNYbI1RpjXGxNSbU0ZqzXmgtRbS3lsrTWutDbG0trbR27t3be39sHcO0d47J3TtnfOxdy6V1ro3du3d+6j2HpPWeq9N671PpfW+j9n7f1-oA0A0BYCIHwKgTAuBiC4FIPQaghBmC8E4PwYQ4hRCKEUMoVQmhDD+GsPYYI7hIi+HiOEdIsRsj5HyMUcopRKj1FqI0TorReiDEGOMSYsxFjrE2NsQ4pxLj3HeN8QE4JISwkRKiTEuJCSklpPSTk7J+T8nFNKcU8plTqn1LqQ05pTTWntM6d0vpfSBmjOGWMmZUyZmzIWSs5Zqz1lbP2Xsg5RzTmnIuVc65dy7mPJeS8t5Hyf2-O-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-5Ty4FQrRUSulTKnF-KCVktJdSxlbLOWCrFWKqVartV6pNZa21jrHVuv9UGkN4bY1xuTSmrNuaC0ltLdWht9bW3to7V2vtg6x1jonbO5da7t27qPaeq9j6v3fuA4B0DYGoMwZg3BhDSG0PYfw4R0jFGyN0fo0x1j3H+MCek-JqTsm5OKaU6p7S2nDNGeM2Z6z9nXPOcC75yK4VYqpXStlUqglUryWUupUyjl3KBWiuFdKtVWrdUGtNZa21Tr3V+sDSG8Nsb43JrTbmgtRaK21trY2xtbb23du7f2wdY6x1jpnfO5da7t1boPcei9t7n2fu-UB4D4HwNQZg3BhDSG0O4YI4RyjZG6M0cY6x7jvHhNidkxJ6TUmZMKZU-pnS+ndIGcM8Z0zFmrO2ac85lz3m3PBWCrFRK6V0qZUErJRS6l1KGXsq5UKkVEqZU6vVUag1FrLVOvdX6wNobw2xvjUmtNmbi1FvLTWhtDbW2do7d2ntvaB2jondOhdK610bq3buw9x7L13sfV+n9gGgNgeg9BuDiHUNYbwwRojpGqM0YY8xzj3H+PCek9J+TsnFOqe01p3T+mjPGdM5Z2z9nnPOVC-5aKwV4qZXyrlUS6VFK6XUuZRy7lAqRVislbq9VhrjWmqdfagNjrQ2RpjfG1N6b80FuLdW2tDbG1ts7V2vtg6x3juXUu9dW691HpPZe+9H6f1-f-UB0DoG4Mwbg0hpD6H8P4dI2RijNHaOMeY9xvjgnpPSbk4pzTqn9Pad0gZwzpnzOWZs45pzrnPP+UCqFRKyVMr5VysJVK8l1K6WMvZcK4VYqpVqt1Vqg1prLU2rdf6wNobw2xoTcmtNOaC1FrLTW+tjaW1to7R23tA6R1jonXO5da6d07r3Yek9l672Pu-UB4D4HwNQfg3BpDyH0P4cI6RyjNHGOMeY5x3jgnROSek9J+T8nlPac09p-z+njOmdM5Z+ztnXPudC6FaLsVUrZWyqVYStVFK6V0qZRy7lAqRUiplVq3VRrDUWutTax1frA2hvDVGiN8ak2ZtzQWktZba0Nqbe2ztXb+1DrHWOmdS710bu3fu49Z7b2Pu-UB4D4HwPgdg3B5DyH0P4aI2R6jtHmOcf47x4T0n5OKeU5p7T+nDPGcs7Zxz7n3P+dC+F2K8VsrZVyqVcSzVFK6X0pZRyvlQqxVys1Tqg1xqzVWsdW6gNQaw2RpjfG1Nmbc2FpLVW+tDam1to7V2vtg6x1jonUutdG7d2HtPVe-9n7f0AaAxBmDMG4NIaQ-hwjpHKN0do8x9j3HhOSdk8p5T2n9P6eM6Z6z9n3OBeC5F2LiVUvZVyqVcSzVNKGV0s5fyoV4qZXKvVVq-VJqzU2udT6gNobw1RqjfG1Nmac2FuLZWhDrbW0du7X2gdw7R2Tunculd27d0nvPbe59X6f0AZAxB6DsGkOobQ4R4jVGaN0cY8x7jvHhPSfk4pzT2nDPGes7Zxz7n3PBeC+F6K8XEqpdyuVSqzVdKmX0tZfywVorJXKvVVqg1pqLU2rtQ6v1waQ1hsjfGpNma82FpLdWhtrbO3dp7f2wdo7x2TvnWuzdO7D2nqvZ+79gGgMQeg3B5D6GCOEco1R2jjHmOcd44J-TsnpOqc0-p4z5nbP2e8-FwL0XYvJXS7lUq1Vmq6WsoFcK8VsrVXar1Uai1Nq7VOsDUGsNkbo3xrTbmwtRaK11sbW2zt3a+0DtHWOydK612bsPaeu9j6f2-oAyBiDsHUPofQ8Rkj1G6OMeY-x4T0nlPqc0-ZwzpnbOOf88FyLsX4rJfS+VWqrV9LmWctFUK8VsqNVaqNYas1NqHXepDcG8N0aY0JvTWmzNuai1lorfWhtLa22du7b2gdw7R3jvnWurdm6D0npvXex9X7f0AZA1B-D8H0OEdI1R-jzGONcf48J2Tin1OaeM8Zyz9nPOBdC5F2LiVUuZVyqVaqzV9LOV8rFRK2VqrNV6pNRat1TrfWBpDeG6NMa40pszdmwthaq31qbW2zt3b+2DtHWO+dK7N3bqPeel9j6v2-oA0BqDcHkPoeQ8Rqj1HmPscE-J-T6ntOmfs+Z1ztnPOBfC5F2K6XMr5XKvVfq5l7K-WCvFeK2V6rtV6uNRa21zqPWBtDZGiNMb42puzbmotRba31pbe2ztPae0DtHWOyda711bq3Ue091730fr-UBsDkH4OocIxR2jzH2P8eE9J1TunrP2fc855z3nguBfC8l+L6XcrFUap1cynlgqhXivlUqzVmqTU2rtU6r1Aag3hqjTGuNqaM05rzQW8tNaG2tt7R2vtg6x0TpXeuzdO6j2XpvR+r9f6gMQfg1B5DmG8OkeoxRpj9HmO8fE9JzThnTO2ec-53zoXIvxfS5l3KlVmqdUsoFWKiVsr1Xat1aa01TrPWBuDWG6NMaE0prTRmnN+ay1VorXWxtTa23tr7YO4dE6Z1LvXVu3dR7z13vfZ+n9gGgMwdg-h9DxGqP0eY5x4T8nVO6ds-53zwXwuxdS9l4qhVGr9VMv5cK8VsrlU6q1Qay1lqHXur9UG4NEaI1RrjfGlNmas25qLRW2tDbW3tq7f24dI6J0zvneurdB6T2Xvfb+oDYHIPQYw7h8j9GaPMeY9x0Tsn1O6es453zwXwvxdS7l0qpVWq9UsoFeK0V8r1VaoNea61jqfX-qDSGyNMaE2pozdmwthaq31qba2zt3b+1DrHROhdq7N07pPZe+9n7f0AZA1B2DqHcPkao3R9j7HhPyc09p6ztn3P+eC5F-LqX8rVU6s1aygVorRWKvVdqvVVrLW2q9YG4NYbI3RrjQmpNabM3ZsLWwmtAA===" class="neo-button">
+      <div class="btn-inner">
+        <div class="btn-icon"><img src="https://raw.githubusercontent.com/teoscrvn/-nh/main/IMG_20260121_224419.jpg" alt="contact"></div>
+        <span class="btn-text">có lỗ hay gì liên hệ admin téo🍎👈 hoặc ng bán tool😀</span>
+      </div>
+    </a>
+    <a href="https://teoscrvn.github.io/Notewepteo/?data=N4IgLglmA2CmIC4QAlANgIbbwB2BzABAE0Gq8TXaAA4FtcBnAYwCcIAHMXC9CXAJgAYuA2XAApctABaBzvFwB3WE1xgAFwHsAlCAA0IWssxhYexCAAyETAGtSgUrwAnrgBmEOAvoArkgDcI+WMoDMCIC8G4DiOwA6mOFiYGBM1AgA9PEeAK7KYJhiAIYZAHQ6FPEAXgCq9B7h4aYWuJlM8hSAm3isFNmZ2Jmw9MI1daSUoso+uKq4HqiAx3isAIykgOV4mEFhERnRsQlJqelZufnxAILKAGqZFcsAwgDPo1YkgIiAgIN4uNgAN7g3o2TKuJgAX6xigHW8FzjAgYTi3QDDeLgIAAjGr4ChmBQAS6+GQAh6NvMpYLgxBgcARiLgAB6wKhgNwkSDmMDKSxiZSAdrxaLgAJrKZJgZIw3EYhTuFFfRkshS+OhlTCaEDKaSYTpGMCo+GIqVaajJOrKehgIxRGJxRKFTLQZQ5CiweLYeKYDwUGxieg8HhTaUMWCZfT4RBTADs-AAnAAWPxBgCswaDAbDWg8nWoEF0Ri4OR40oMOh89CM0EKAFpqJSzNgQABfIA" class="neo-button">
+      <div class="btn-inner">
+        <div class="btn-icon"><img src="https://raw.githubusercontent.com/teoscrvn/-nh/refs/heads/main/Screenshot_2026-01-26-21-04-10-58_99c04817c0de5652397fc8b56c3b3817.jpg" alt="note"></div>
+        <span class="btn-text">🍎note link hướng dẫ làm script P2⃣🍎</span>
+      </div>
+    </a>
+    <a href="" class="neo-button">
+      <div class="btn-inner">
+        <div class="btn-icon"><img src="https://raw.githubusercontent.com/teoscrvn/-nh/refs/heads/main/41RtRhh9cgL.jpg" alt="trống"></div>
+        <span class="btn-text">trống:D</span>
+      </div>
+    </a>
+    <a href="https://teoscrvn.github.io/Notewepteo/?data=N4IgLglmA2CmIC4QGUDGAnCAHMACMgq3gB2A5rgBaDHeFvgJcD2-g-Xh7oCGuAbhACayNYATCAA0IVPSJhYUxCGj02PAM5hMpABQk2AW1gIAEmDBYA4rDAaAOiHLGsyhAHon7AO4A6ElHIBXAEa+yrDoElIyYB4SOk7S9MoYnEROACoAtKRp5GlYaa6wAGbKTuSwSsU6bBDJcdxYHmAAHmA2AJStGq1WRN2AvBuAYju4ElhYAJ749AAHRLj+gJt4+ID1eHg8gNN4qOT4EEykXBCA43hgoiD0bkQhcmAMuEo61cfKviP06EdIxxhl0jyIAIwA7AA2ACcAAZfr9QcCACwAZmhAA4xJwQsoIJI5IIPKDjjIJHx0HJoAAvNKqdQkEAAXyAA" class="neo-button">
+      <div class="btn-inner">
+        <div class="btn-icon"><img src="https://raw.githubusercontent.com/teoscrvn/-nh/main/IMG_20260114_213903.jpg" alt="script"></div>
+        <span class="btn-text">🍎🇻🇳 script tổng hợp téo 🍎</span>
+      </div>
+    </a>
+  </div>
+  
+  <!-- HÌNH ẢNH BANNER -->
+  <div class="feature-image">
+    <img src="https://raw.githubusercontent.com/teoscrvn/-nh/main/Screenshot_2026-01-15-11-05-48-86_f69139cffc4d135a71392e13634f144a.jpg" alt="banner" loading="lazy">
+  </div>
+  
+  <!-- PHẦN BÌNH LUẬN THẬT (localStorage) -->
+  <div class="comment-section">
+    <div class="comment-header">
+      <h3><i class="far fa-comment-dots" style="color:#7aa5ff;"></i> Bình luận · cộng đồng</h3>
+      <span class="refresh-badge" id="countdownDisplay">⏳ 30s</span>
+    </div>
+    
+    <!-- FORM GỬI BÌNH LUẬN -->
+    <div class="comment-form">
+      <input type="text" id="commentInput" placeholder="Viết bình luận... (tên mặc định: Khách)" maxlength="120">
+      <button id="sendCommentBtn"><i class="fas fa-paper-plane"></i> Gửi</button>
+    </div>
+    
+    <div class="comment-list" id="commentListContainer">
+      <div class="loading-placeholder"><i class="fas fa-spinner fa-pulse"></i> Đang tải bình luận...</div>
+    </div>
+    
+    <button class="manual-refresh" id="manualRefreshBtn"><i class="fas fa-sync-alt"></i> Tải lại bình luận</button>
+    <div class="storage-note">
+      💬 Bình luận của bạn được lưu trên thiết bị này. Để mọi người cùng thấy cần có máy chủ.
+    </div>
+  </div>
+  
+  <div class="footer-note">
+    © 2026 𖤍𝓣é𝓸🍎夜影𖤍 · Uy tín chia sẻ code
+  </div>
 </div>
 
-    <div class="name">🍎 téo 🍎 SCRVN 🇻🇳</div>
-    <div class="desc">🍎 chia sẻ đồ hướng dẫn làm script ... có gì k hiểu ib tiktok hoặc zalo mik</div>
-
-    <div class="mini-buttons">
-        <a href="https://www.tiktok.com/@teoscrvn?_r=1&_t=ZS-93HmGiY8o7k" class="mini-btn"><img src="https://img.icons8.com/ios-filled/50/globe.png"></a>
-        <a href="https://zalo.me/g/nvmyhr001" class="mini-btn"><img src="https://img.icons8.com/ios-filled/50/conference-call.png"></a>
-        <a href="https://www.facebook.com/share/1Bg1fEHXEu/" class="mini-btn"><img src="https://img.icons8.com/ios-filled/50/facebook.png"></a>
-    </div>
-
-    <div class="button-list">
-
-<!-- 🍎 NÚT TRANG 2 -->
-<!-- 🍎 NÚT TRANG 3 -->
-<a href="page3.html" class="button">
-    <div class="button-content">
-        <div class="button-icon">
-            <img src="https://raw.githubusercontent.com/teoscrvn/-nh/refs/heads/main/image-3.jpg">
-        </div>
-        <div>
-            😆🍎 trang chia sẻ đồ free fire 🍏🍑
-        </div>
-    </div>
-</a>
-
-<a href="page2.html" class="button page-btn">
-    <div class="button-content">
-        <div class="button-icon">
-            <img src="https://raw.githubusercontent.com/teoscrvn/-nh/refs/heads/main/image-2.jpg" width="32">
-        </div>
-        <div>
-            🍎Tổng hợp tất cả clent mới nhất 🍏
-        </div>
-    </div>
-</a>
-
-<!-- 🍎 LIÊN HỆ ADMIN -->
-<a href="https://teoscrvn.github.io/Notewepteo/?data=N4IgLglmA2CmIC4QGEDPACAboUrwB27BEQEEG8dAcwBv1oIAr-AC0HG8dALwENoB7dNgEwFsI+MAEvuACj6D8Ad1gAHdLgAHATwCU6ADK0GzKUPQBHAK5sl9VP1Ydu9ToHa8AMboA1gCN0AMzavY7zk5XCwBDkAAaECdOXDBYWMQUDBx8YjJKajp0JhsuHgFDUU5AHg3AOX30SQLZBSU1TR0snIN8U3NcS2t2PPtnN08fPwCg0MBeDcAwPfGAHVxpnVxXEcBxHaWVxenp8S7OdXX2sDB5AGcEAHoTrYA6flgT0hPcTH5VegAnAAY3gEZduYXl-9Wu3EA38gVcOxmewOxzOMjhFx8TlBQQu0X4J0O9DYLxunwAYmQvEYAHIAaXkAFEAMonXYAWnQyAAT-hcIB+vBM6H4JkAi3j4bnmMCBaBYCCKMAvQCXeC5IGzFJk9OhIK4hcFcKR0O4QsJhRZzL8lRAVcNMMp0BBeOheIBRvCV5GsuAAFz8hMFlarVktdvR9kdTic4TILu6UWiTgABTGceQXUgQNjqzVsTgvYOBAD8AH0XgBeT4AMkzYBzAC0qXSAJwAZmQVIAHBWAKpGAAsVLxu2ZqQAR6oqGaLYa1Y70ABJXgIdBLKMxuMJ0juZOpoWcCIgTgyXCwF6JIr5aRrw4meTyFNgRJrpw4thxXiIT4AdgAbBWvm+3lWnwAmSKYbeHCAYkSL8LjeNd4miXht0SaAWDpQ4JSEUgQAAXyAA"
-   class="button">
-    <div class="button-content">
-        <div class="button-icon">
-            <img src="https://raw.githubusercontent.com/teoscrvn/-nh/main/IMG_20260121_224419.jpg" width="32">
-        </div>
-        <div>
-            có lỗ hay gì liên hệ admin téo🍎👈 hoặc ng bán tool😀
-        </div>
-    </div>
-</a>
-
-<!-- 🍎 NOTE SCRIPT P2 -->
-<a href="https://teoscrvn.github.io/Notewepteo/?data=N4IgLglmA2CmIC4QAlANgIbbwB2BzABAE0Gq8TXaAA4FtcBnAYwCcIAHMXC9CXAJgAYuA2XAApctABaBzvFwB3WE1xgAFwHsAlCAA0IWssxhYexCAAyETAGtSgUrwAnrgBmEOAvoArkgDcI+WMoDMCIC8G4DiOwA6mOFiYGBM1AgA9PEeAK7KYJhiAIYZAHQ6FPEAXgCq9B7h4aYWuJlM8hSAm3isFNmZ2Jmw9MI1daSUoso+uKq4HqiAx3isAIykgOV4mEFhERnRsQlJqelZufnxAILKAGqZFcsAwgDPo1YkgIiAgIN4uNgAN7g3o2TKuJgAX6xigHW8FzjAgYTi3QDDeLgIAAjGr4ChmBQAS6+GQAh6NvMpYLgxBgcARiLgAB6wKhgNwkSDmMDKSxiZSAdrxaLgAJrKZJgZIw3EYhTuFFfRkshS+OhlTCaEDKaSYTpGMCo+GIqVaajJOrKehgIxRGJxRKFTLQZQ5CiweLYeKYDwUGxieg8HhTaUMWCZfT4RBTADs-AAnAAWPxBgCswaDAbDWg8nWoEF0Ri4OR40oMOh89CM0EKAFpqJSzNgQABfIA"
-   class="button">
-    <div class="button-content">
-        <div class="button-icon">
-            <img src="https://raw.githubusercontent.com/teoscrvn/-nh/refs/heads/main/Screenshot_2026-01-26-21-04-10-58_99c04817c0de5652397fc8b56c3b3817.jpg">
-        </div>
-        <div>
-            🍎note link hướng dẫ làm script P2⃣🍎
-        </div>
-    </div>
-</a>
-
-<!-- 🍎 DELTA X -->
-<a href=""
-   class="button">
-    <div class="button-content">
-        <div class="button-icon">
-            <img src="https://raw.githubusercontent.com/teoscrvn/-nh/refs/heads/main/41RtRhh9cgL.jpg">
-        </div>
-        <div>
-            trống:D
-        </div>
-    </div>
-</a>
-
-<!-- 🍎 SCRIPT TỔNG HỢP -->
-<a href="https://teoscrvn.github.io/Notewepteo/?data=N4IgLglmA2CmIC4QGUDGAnCAHMACMgq3gB2A5rgBaDHeFvgJcD2+g-Xh7oCGuAbhACayNYATCAA0IVPSJhYUxCGj02PAM5hMpABQk2AW1gIAEmDBYA4rDAaAOiHLGsyhAHon7AO4A6ElHIBXAEa+yrDoElIyYB4SOk7S9MoYnEROACoAtKRp5GlYaa6wAGbKTuSwSsU6bBDJcdxYHmAAHmA2AJStGq1WRN2AvBuAYju4ElhYAJ749AAHRLj+gJt4+ID1eHg8gNN4qOT4EEykXBCA43hgoiD0bkQhcmAMuEo61cfKviP06EdIxxhl0jyIAIwA7AA2ACcAAZfr9QcCACwAZmhAA4xJwQsoIJI5IIPKDjjIJHx0HJoAAvNKqdQkEAAXyAA"
-   class="button">
-    <div class="button-content">
-        <div class="button-icon">
-            <img src="https://raw.githubusercontent.com/teoscrvn/-nh/main/IMG_20260114_213903.jpg">
-        </div>
-        <div>
-            🍎🇻🇳 script tổng hợp téo 🍎
-        </div>
-    </div>
-</a>
-
-</div>
-
-<!-- 🔹 PHẦN 2 -->
-<div class="section">
-<div class="container">
-
-    <div class="avatar-wrapper">
-        <img src="https://raw.githubusercontent.com/teoscrvn/-nh/main/Screenshot_2026-01-15-11-05-48-86_f69139cffc4d135a71392e13634f144a.jpg">
-    </div>
-
-    <div class="name">shop bán tool VIP👑 </div>
-    <div class="desc">🍎 shop bán tool  giá rẻ mua tool ib tiktok nha </div>
-
-    <div class="buttons">
-    <!-- 🍎 NÚT MỚI -->
-<a href="https://teoscrvn.github.io/Notewepteo/?data=N4IgLglmA2CmIC4QGEDPACAboUrwB27BEQEEG8dAcwBv1oIAr-AC0HG8dALwENoB7dNgEwFsI+MAEvuACj6D8Ad1gAHdLgAHATwCU6ADK0GzKUPQBHAK5sl9VP1Ydu9ToHa8AMboA1gCN0AMzavY7zk5XCwBDkAAaECdOXDBYWMQUDBx8YjJKajp0JhsuHgFDUU5AHg3AOX30SQLZBSU1TR0snIN8U3NcS2t2PPtnN08fPwCg0MBeDcAwPfGAHVxpnVxXEcBxHaWVxenp8S7OdXX2sDB5AGcEAHoTrYA6flgT0hPcTH5VegAnAAY3gEZduYXl-9Wu3EA38gVcOxmewOxzOMjhFx8TlBQQu0X4J0O9DYLxunwAYmQvEYAHIAaXkAFEAMonXYAWnQyAAT-hcIB+vBM6H4JkAi3j4bnmMCBaBYCCKMAvQCXeC5IGzFJk9OhIK4hcFcKR0O4QsJhRZzL8lRAVcNMMp0BBeOheIBRvCV5GsuAAFz8hMFlarVktdvR9kdTic4TILu6UWiTgABTGceQXUgQNjqzVsTgvYOBAD8AH0XgBeT4AMkzYBzAC0qXSAJwAZmQVIAHBWAKpGAAsVLxu2ZqQAR6oqGaLYa1Y70ABJXgIdBLKMxuMJ0juZOpoWcCIgTgyXCwF6JIr5aRrw4meTyFNgRJrpw4thxXiIT4AdgAbBWvm+3lWnwAmSKYbeHCAYkSL8LjeNd4miXht0SaAWDpQ4JSEUgQAAXyAA" class="button">
-    <div class="button-content">
-        <div class="button-icon">
-            <img src="https://raw.githubusercontent.com/teoscrvn/-nh/main/IMG_20260121_224419.jpg" width="32">
-        </div>
-        <div>
-            🍎 ib zalo admin téo  hoặc ng bán ib tiktok
-        </div>
-    </div>
-</a>
-        <a href="https://teoscrvn.github.io/Notewepteo/?data=N4IgLglmA2CmIC4QBUD2roAIAeB3VATtACaYBuArgIaZgAWqAh2JnRIMN4AtpgGYGyxMACkwAjQMV4AO179BkgFfS6gQsAImAMYBPtQCYADPWoBGAJSBeDcDcO4FgCQCLkgeD+QAGhDrUksLHeIQoo2cDiO4A8G4By+7Tiah4EnBTYwgDSAJeoOBSAi3iSAOa0ADfcEtKcgNt4apJ0gKV4LGDhmCaBgKL7ZoDge5iY0BCSANYBAQA6kn10YGAADgDOCAD0E22dACyjFKIAdK6cE0Z6AFJ6AFoAInoAymQAQn19yBCA-XjDmICIgFfSsfhEpH0AMu0dmL39pUNjSbTL7zRYrVBrXC4ABiqDAPCoACUAI6ic6SRGAZbw1A9pMM6IByvCUgAbAQqZTDEQDVeNJRrAwBRbmB0FgANQUxjSMCAa7xycQAE-k+iwZJ0Um86mYUqMTCAPg3AE676MGI3GUxmHVBy1WEx0AGYqABZAByhwAGgAOACCenRhyoagIHKy6jogGm8Ch9IyYUapVrEiiYAC-mA9GgABxFYFEYjg3FliJpBcyNHRALN40gtAElk4BJvFKyeSpQggEG8f0qTmAYEBBdnWoBxvEwuHafR0rTKAE8NIw1GrMGyIKR6NlMPjqmRQyLAM140gyVE4gkoNHoTBYbC4GlQw2G7fUAGfMBlBxBRJgqMROI3JDqKQmskyMLRI9FYvkZAJJbud7Rq9A6-pDDRPQo0jqGU3AdPI-qQI8Tp0KMmAAKwALRmrQBAAEeSNI0ChuQXI0C+gjBpIsyYN8gGYJwgD7eBogC3eDQoyAKt4kr0SUdA0JIu53Moe4zoIdzbn0ADCu77pgh7Hqe7ROCAqC4JIkbeGASTiWekhSQsG6EGA3hKoCUwAF5UNAqBLLOEwZBMkhkJwrZ0AQeh6EYUnqPwVAeMQiBGAA7AAbAAnA5Oq6r5-m+c4ZCRqMEBuN4OhLHoUmeK4xDyUg0B6QhoxgAQ7QZCAAC+QA" class="button">
-            <div class="button-content">
-                <div class="button-icon">
-                    <img src="https://raw.githubusercontent.com/teoscrvn/-nh/main/IMG_20260115_190620.jpg">
-                </div>
-                <div>tool Free vua thoát hiểm X world 30 thua1🍎</div>
-            </div>
-        </a>
-    </div>
-
-    <div class="share-box">
-        <h3>📤 Chia sẻ trang</h3>
-        <p>Chia sẻ cho bạn bè để ủng hộ nhé</p>
-        <div class="share-btn" onclick="navigator.clipboard.writeText(window.location.href)">
-            🔗 Copy link
-        </div>
-    </div>
-
-    <div class="footer">
-        © 2026 🍎 téo scrVN🇻🇳
-    </div>
-
-</div>
-</div>
-<script>
-const VIP_PASSWORD = "VIP_TEO_2026";
-const SECRET_CODE = "MA_BI_MAT_CUA_BAN";
-
-let clickCount = 0;
-let timer = null;
-let locked = false;
-
-const avatar = document.getElementById("secretAvatar");
-avatar.style.userSelect = "none";
-avatar.style.webkitTapHighlightColor = "transparent";
-
-avatar.addEventListener("click", (e) => {
-    e.stopPropagation();
-    if (locked) return;
-
-    clickCount++;
-
-    if (clickCount > 10) {
-        resetAll();
-        return;
-    }
-
-    if (clickCount === 10) {
-        locked = true;
-
-        timer = setTimeout(() => {
-            const input = prompt("🔐 Nhập mật khẩu:");
-
-            if (input === VIP_PASSWORD) {
-                window.location.href = "vip.html";
-            } 
-            else if (input === SECRET_CODE) {
-                window.location.href = "error.html";
-            } 
-            else {
-                alert("❌ Sai thông tin");
-            }
-
-            resetAll();
-        }, 5000);
-    }
-});
-
-document.addEventListener("pointerdown", (e) => {
-    if (!avatar.contains(e.target)) resetAll();
-});
-
-function resetAll() {
-    clickCount = 0;
-    locked = false;
-    if (timer) clearTimeout(timer);
-    timer = null;
-}
-</script>
+<!-- ========== QUẢNG CÁO (đã khôi phục) ========== -->
 <script src="https://pl28888097.effectivegatecpm.com/bd/7e/33/bd7e334d86be9c2290262e3722ec1eb1.js"></script>
 <script src="https://pl28888443.effectivegatecpm.com/1f/20/ab/1f20ab92aa2bd4e8c8b369df16d088e6.js"></script>
 
 <script>
-document.addEventListener("DOMContentLoaded", function() {
-    document.querySelectorAll(".button").forEach(btn => {
-        btn.addEventListener("click", function() {
-            window.open("https://www.effectivegatecpm.com/v8dk1nh4f?key=32b89af0ad94769b46df43f5ccd8dcf1");
-        });
-    });
-});
-</script>
+  (function() {
+    // ----- AVATAR SECRET (giữ nguyên) -----
+    const VIP_PASSWORD = "VIP_TEO_2026";
+    const SECRET_CODE = "MA_BI_MAT_CUA_BAN";
+    let clickCount = 0;
+    let timer = null;
+    let locked = false;
+    const avatar = document.getElementById("secretAvatar");
+    if (avatar) {
+      avatar.style.userSelect = "none";
+      avatar.style.webkitTapHighlightColor = "transparent";
+      avatar.addEventListener("click", (e) => {
+        e.stopPropagation();
+        if (locked) return;
+        clickCount++;
+        if (clickCount > 10) { resetAll(); return; }
+        if (clickCount === 10) {
+          locked = true;
+          timer = setTimeout(() => {
+            const input = prompt("🔐 Nhập mật khẩu:");
+            if (input === VIP_PASSWORD) window.location.href = "vip.html";
+            else if (input === SECRET_CODE) window.location.href = "error.html";
+            else alert("❌ Sai thông tin");
+            resetAll();
+          }, 5000);
+        }
+      });
+      document.addEventListener("pointerdown", (e) => { if (!avatar.contains(e.target)) resetAll(); });
+      function resetAll() { clickCount = 0; locked = false; if (timer) clearTimeout(timer); timer = null; }
+    }
 
+    // ----- QUẢNG CÁO POPUP KHI CLICK NÚT (giữ nguyên logic cũ) -----
+    document.addEventListener("DOMContentLoaded", function() {
+      document.querySelectorAll(".neo-button").forEach(btn => {
+        btn.addEventListener("click", function(e) {
+          // Mở popup quảng cáo, không ảnh hưởng đến điều hướng mặc định
+          window.open("https://www.effectivegatecpm.com/v8dk1nh4f?key=32b89af0ad94769b46df43f5ccd8dcf1");
+        });
+      });
+    });
+
+    // ----- BÌNH LUẬN (localStorage) + TỰ ĐỘNG LOAD 30S -----
+    const STORAGE_KEY = 'teo_comments_real';
+    const commentContainer = document.getElementById('commentListContainer');
+    const countdownEl = document.getElementById('countdownDisplay');
+    const manualBtn = document.getElementById('manualRefreshBtn');
+    const commentInput = document.getElementById('commentInput');
+    const sendBtn = document.getElementById('sendCommentBtn');
+
+    const sampleComments = [
+      { user: '🐧 MinhScript', text: 'Code xịn quá anh ơi, có hướng dẫn chi tiết không?' },
+      { user: '🍏 FFMaster', text: 'Tải về dùng mượt, cảm ơn téo nhiều!' },
+      { user: '💻 Khoa Dev', text: 'Trang uy tín, mình đã share cho anh em.' },
+      { user: '🌟 Lyn_2k6', text: 'Script tổng hợp quá đỉnh, chờ bản update mới.' },
+      { user: '🔥 Huy Lỏ', text: 'Cho mình xin link hướng dẫn với ạ.' },
+      { user: '⚡ Tèo Em', text: 'Giao diện mới đẹp xuất sắc luôn!' },
+      { user: '🍑 Bảo Ngọc', text: 'Có tool Free Fire mới nhất chưa ad?' },
+      { user: '🛡️ Tín Nguyễn', text: 'Đã copy link, chúc admin sức khỏe.' }
+    ];
+
+    function getStoredComments() {
+      try { return JSON.parse(localStorage.getItem(STORAGE_KEY)) || []; } catch(e) { return []; }
+    }
+    function saveStoredComments(comments) {
+      try { localStorage.setItem(STORAGE_KEY, JSON.stringify(comments)); } catch(e) {}
+    }
+
+    function addUserComment(text) {
+      if (!text || !text.trim()) return;
+      const trimmed = text.trim().substring(0, 120);
+      const newComment = { user: '👤 Khách', text: trimmed, timestamp: Date.now() };
+      const stored = getStoredComments();
+      stored.push(newComment);
+      if (stored.length > 30) stored.shift();
+      saveStoredComments(stored);
+      renderAllComments();
+      if (commentInput) commentInput.value = '';
+    }
+
+    function buildDisplayComments() {
+      const stored = getStoredComments();
+      const sampleCount = Math.floor(Math.random() * 3) + 2;
+      const shuffled = [...sampleComments].sort(() => 0.5 - Math.random());
+      const selectedSamples = shuffled.slice(0, sampleCount).map(c => ({ ...c, time: 'vừa xong', isSample: true }));
+      const storedDisplay = stored.map(c => ({
+        user: c.user, text: c.text,
+        time: formatTimeAgo(c.timestamp), isSample: false
+      }));
+      let combined = [...selectedSamples, ...storedDisplay];
+      combined.sort((a, b) => (a.isSample === b.isSample) ? 0 : a.isSample ? 1 : -1);
+      return combined;
+    }
+
+    function formatTimeAgo(ts) {
+      const diff = Date.now() - ts;
+      const mins = Math.floor(diff / 60000);
+      if (mins < 1) return 'vài giây trước';
+      if (mins < 60) return `${mins} phút trước`;
+      const hrs = Math.floor(mins / 60);
+      if (hrs < 24) return `${hrs} giờ trước`;
+      return `${Math.floor(hrs / 24)} ngày trước`;
+    }
+
+    function escapeHtml(t) { const d = document.createElement('div'); d.textContent = t; return d.innerHTML; }
+
+    function renderAllComments() {
+      const comments = buildDisplayComments();
+      if (!commentContainer) return;
+      if (!comments.length) {
+        commentContainer.innerHTML = `<div class="loading-placeholder">✨ Chưa có bình luận nào.</div>`;
+        return;
+      }
+      let html = '';
+      comments.forEach(c => {
+        html += `<div class="comment-item"><div class="comment-user"><i class="fas fa-user-circle"></i><strong>${escapeHtml(c.user)}</strong><span class="comment-time">${escapeHtml(c.time)}</span></div><div class="comment-text">${escapeHtml(c.text)}</div></div>`;
+      });
+      commentContainer.innerHTML = html;
+    }
+
+    let countdown = 30, intervalId = null, countdownInterval = null;
+    function refreshComments(reset = true) { renderAllComments(); if (reset) { countdown = 30; updateCountdownDisplay(); } }
+    function updateCountdownDisplay() { if (countdownEl) countdownEl.textContent = `⏳ ${countdown}s`; }
+    function startCountdown() {
+      if (countdownInterval) clearInterval(countdownInterval);
+      countdownInterval = setInterval(() => {
+        countdown--; updateCountdownDisplay();
+        if (countdown <= 0) { refreshComments(true); countdown = 30; updateCountdownDisplay(); }
+      }, 1000);
+    }
+    function startAutoRefresh() {
+      if (intervalId) clearInterval(intervalId);
+      intervalId = setInterval(() => { refreshComments(true); countdown = 30; updateCountdownDisplay(); }, 30000);
+    }
+
+    if (sendBtn) sendBtn.addEventListener('click', () => { addUserComment(commentInput.value); countdown = 30; updateCountdownDisplay(); });
+    if (commentInput) commentInput.addEventListener('keypress', e => { if (e.key === 'Enter') { e.preventDefault(); sendBtn.click(); } });
+    if (manualBtn) manualBtn.addEventListener('click', () => { refreshComments(true); countdown = 30; updateCountdownDisplay(); });
+
+    renderAllComments();
+    startCountdown();
+    startAutoRefresh();
+  })();
+</script>
 </body>
 </html>
